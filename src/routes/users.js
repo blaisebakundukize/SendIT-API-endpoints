@@ -81,4 +81,36 @@ router.post('/register', (req, res) => {
   });
 });
 
+// Get user parcel delivery orders
+router.get('/:userId/parcels', (req, res) => {
+  const userParcels = [];
+  req.params.userId = Number(req.params.userId);
+
+  const user = User.filter(eachUser => eachUser.userId === req.params.userId);
+  if (user.length > 0) {
+    Parcels.forEach(parcel => {
+      if (parcel.userId === req.params.userId) {
+        userParcels.push(parcel.parcel);
+      }
+    });
+
+    if (userParcels.length > 0) {
+      return res.status(200).json({
+        success: true,
+        message: 'User parcels retrieved successfully',
+        userId: req.params.userId,
+        parcels: userParcels
+      });
+    }
+    return res.status(404).json({
+      success: true,
+      message: 'User has no parcels'
+    });
+  }
+  return res.status(404).json({
+    success: false,
+    message: 'User not Exist'
+  });
+});
+
 module.exports = router;
