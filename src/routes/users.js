@@ -1,10 +1,16 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
+// import passport from 'passport';
 import User from '../db/users';
 
 const router = express.Router();
 
-// Register Form POST - new User
+// User Login Form POST
+// router.post('/login', (req, res, next) => {
+
+// });
+
+// User Register Form POST
 router.post('/register', (req, res) => {
   const errors = [];
 
@@ -36,11 +42,11 @@ router.post('/register', (req, res) => {
   }
 
   if (errors.length > 0) {
-    res.send(errors);
+    res.status(400).send(errors);
   } else {
     const oldUser = User.filter(user => user.email === req.body.email);
     if (oldUser.length > 0) {
-      return res.send({
+      return res.status(400).send({
         success: false,
         message: 'Email already registered'
       });
@@ -57,7 +63,7 @@ router.post('/register', (req, res) => {
       newUser.password = hash;
       User.push(newUser);
 
-      return res.send({
+      return res.status(201).send({
         success: true,
         message: 'User is successfully registered'
       });
