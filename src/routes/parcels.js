@@ -1,11 +1,73 @@
 import express from 'express';
 import Parcels from '../db/parcels';
+import User from '../db/users';
 
 const router = express.Router();
+
+// Create parcel
+router.post('/', (req, res) => {
+  const { userId, parcel } = req.body;
+  const pricePerOneWeightOutside = 50; // Price in $
+  const pricePerOneWeightInside = 10; // Price in $
+  const priceIsForParcelAreaLimit = 2706; // Area is in cm
+  // area of a parcel
+  const area =
+    parcel.height * parcel.length * 2 +
+    parcel.width * parcel.height * 2 +
+    parcel.length * parcel.width * 2;
+
+  // Parcel price in $
+  let price;
+
+  const user = User.filter(customer => customer.userId === userId)[0];
+
+  const calculatePrice = pricePerOneWeight => {
+    // Parcel area is not exceed
+    if (area <= priceIsForParcelAreaLimit) {
+      return pricePerOneWeight * parcel.weight * parcel.quantity;
+    }
+    // Parcel area exceed
+    return (
+      (pricePerOneWeight * parcel.weight * parcel.quantity * area) /
+      priceIsForParcelAreaLimit
+    );
+  };
+
+  if (user) {
+    // Deliver a parcel inside country
+    // Deliver a parcel outside country
+    price =
+      parcel.countryFrom === parcel.countryTo
+        ? calculatePrice(pricePerOneWeightInside)
+        : calculatePrice(pricePerOneWeightOutside);
+    // Parcel Id
+    const pId = Parcels.length + 1;
+    const parcelWith = parcel;
+    parcelWith.parcelId = pId;
+    parcelWith.status = 'booking';
+
+    // Save parcel
+    Parcels.push({ userId, price, parcel: parcelWith });
+
+    console.log(Parcels);
+    return res.status(201).json({
+      success: true,
+      message: 'Parcel created successfully',
+      parcelId: pId,
+      price: Number(price.toFixed(2))
+    });
+  }
+
+  return res.status(404).json({
+    success: false,
+    message: 'User not Exist'
+  });
+});
 
 // Get all parcels
 router.get('/', (req, res) => {
   const parcelDeliveries = [];
+  console.log(Parcels);
   Parcels.map(parcel => parcelDeliveries.push(parcel.parcel));
   res.status(200).json({
     success: true,
