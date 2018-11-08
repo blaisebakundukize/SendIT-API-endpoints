@@ -2,6 +2,7 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 // import passport from 'passport';
 import User from '../db/users';
+import Parcels from '../db/parcels';
 
 const router = express.Router();
 
