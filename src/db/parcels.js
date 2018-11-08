@@ -11,13 +11,14 @@ const parcels = [
       countryFrom: 'Kenya',
       postcodeFrom: '12345',
       countryTo: 'USA',
-      postcodeTo: '23456'
+      postcodeTo: '23456',
+      status: 'booking'
     }
   },
   {
     userId: 2,
     parcel: {
-      parcelId: '2',
+      parcelId: 2,
       quantity: 1,
       weigth: 5,
       height: 60,
@@ -26,7 +27,8 @@ const parcels = [
       countryFrom: 'Kenya',
       postcodeFrom: '12345',
       countryTo: 'USA',
-      postcodeTo: '23456'
+      postcodeTo: '23456',
+      status: 'booking'
     }
   }
 ];
