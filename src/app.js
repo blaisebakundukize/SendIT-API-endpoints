@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 
 // Load routes
 import users from './routes/users';
+import parcels from './routes/parcels';
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 
 // Use routes
 app.use('/api/v1/users', users);
+app.use('/api/v1/parcels', parcels);
 
 // Handler for 404 - Resource Not Found
 app.use((req, res) => {
