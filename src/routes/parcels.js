@@ -49,7 +49,7 @@ router.post('/', (req, res) => {
     // Save parcel
     Parcels.push({ userId, price, parcel: parcelWith });
 
-    console.log(Parcels);
+    // console.log(Parcels);
     return res.status(201).json({
       success: true,
       message: 'Parcel created successfully',
@@ -67,7 +67,7 @@ router.post('/', (req, res) => {
 // Get all parcels
 router.get('/', (req, res) => {
   const parcelDeliveries = [];
-  console.log(Parcels);
+  // console.log(Parcels);
   Parcels.map(parcel => parcelDeliveries.push(parcel.parcel));
   res.status(200).json({
     success: true,
