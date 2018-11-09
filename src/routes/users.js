@@ -42,9 +42,7 @@ router.post('/register', (req, res) => {
     });
   }
 
-  if (errors.length > 0) {
-    res.status(400).send(errors);
-  } else {
+  if (errors.length === 0) {
     const oldUser = User.filter(user => user.email === req.body.email);
     if (oldUser.length > 0) {
       return res.status(400).send({
@@ -54,7 +52,7 @@ router.post('/register', (req, res) => {
     }
     try {
       const newUser = {
-        userId: User.length + 1,
+        userId: User[User.length - 1].userId + 1,
         names: req.body.names,
         email: req.body.email,
         password: req.body.password
@@ -75,9 +73,9 @@ router.post('/register', (req, res) => {
       });
     }
   }
-  return res.send({
+  return res.status(400).send({
     success: false,
-    message: 'User not registered! Please try again'
+    error: errors
   });
 });
 
@@ -103,7 +101,7 @@ router.get('/:userId/parcels', (req, res) => {
       });
     }
     return res.status(404).json({
-      success: true,
+      success: false,
       message: 'User has no parcels'
     });
   }
