@@ -7,7 +7,7 @@ const router = express.Router();
 // Create parcel
 router.post('/', (req, res) => {
   const { userId, parcel } = req.body;
-  const pricePerOneWeightOutside = 50; // Price in $
+  const pricePerOneWeightOutside = 40; // Price in $
   const pricePerOneWeightInside = 10; // Price in $
   const priceIsForParcelAreaLimit = 2706; // Area is in cm
   // area of a parcel
@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
         ? calculatePrice(pricePerOneWeightInside)
         : calculatePrice(pricePerOneWeightOutside);
     // Parcel Id
-    const pId = Parcels.length + 1;
+    const pId = Parcels[Parcels.length - 1].parcel.parcelId + 1;
     const parcelWith = parcel;
     parcelWith.parcelId = pId;
     parcelWith.status = 'booking';
@@ -108,7 +108,7 @@ router.put('/:parcelId/cancel', (req, res) => {
     }
   }
 
-  if (parcelDelivery) {
+  if (parcelDelivery.parcelId) {
     if (
       parcelDelivery.status === 'booking' ||
       parcelDelivery.status === 'canceled'
