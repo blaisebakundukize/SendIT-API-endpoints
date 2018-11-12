@@ -27,6 +27,22 @@ coveralls: [![Coverage Status](https://coveralls.io/repos/github/blaisebakunduki
 > - Access the API Here: [https://agile-dusk-15975.herokuapp.com/api/v1/]
 > - Fetching all parcels: [https://agile-dusk-15975.herokuapp.com/api/v1/parcels]
 > - For other roots use IDs 1, 2 for users and parcels
+> - For creating a parcel you have to post a json data: 
+`{
+	"userId": 1,
+	"parcel": {
+		"quantity": 1,
+		"weight": 5,
+		"height": 60,
+		"width": 60,
+		"length": 60,
+		"countryFrom": "USA",
+		"postZipCodeFrom": "12345",
+		"countryTo": "Kenya",
+		"postZipCodeTo": "23453"
+	}
+}`
+
 
 #### Core Technology
 > - Back-end: Expressjs
