@@ -5,11 +5,11 @@
 SendIT is a courier service that helps users deliver parcels to different destinations. SendIT provides courier quotes based on weight categories.
 
 
-*Travis CI
+Travis CI
 > - Master Branch [![Build Status](https://travis-ci.org/blaisebakundukize/SendIT-API-endpoints.svg?branch=master)](https://travis-ci.org/blaisebakundukize/SendIT-API-endpoints)
 > - Develop Branch [![Build Status](https://travis-ci.org/blaisebakundukize/SendIT-API-endpoints.svg?branch=develop)](https://travis-ci.org/blaisebakundukize/SendIT-API-endpoints)
 
-Access the API Here: .[https://agile-dusk-15975.herokuapp.com/api/v1/].
+coveralls: [![Coverage Status](https://coveralls.io/repos/github/blaisebakundukize/SendIT-API-endpoints/badge.svg?branch=master)](https://coveralls.io/github/blaisebakundukize/SendIT-API-endpoints?branch=master)
 
 #### API V1 Available Functionalities
 
@@ -21,6 +21,12 @@ Access the API Here: .[https://agile-dusk-15975.herokuapp.com/api/v1/].
 | PUT `/api/v1/parcels/<parcelID>/cancel` | Cancel the specific parcel delivery order |
 | POST `/api/v1/parcels` | Create a parcel delivery order |
 | POST `/api/v1/users` | Register new user |
+
+#### Access API
+
+> - Access the API Here: [https://agile-dusk-15975.herokuapp.com/api/v1/]
+> - Fetching all parcels: [https://agile-dusk-15975.herokuapp.com/api/v1/parcels]
+> - For other roots use IDs 1, 2 for users and parcels
 
 #### Core Technology
 > - Back-end: Expressjs
