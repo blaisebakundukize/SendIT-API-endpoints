@@ -30,7 +30,8 @@ coveralls: [![Coverage Status](https://coveralls.io/repos/github/blaisebakunduki
 
 For creating a parcel you have to post a json data: 
 
-```{
+```
+{
 	"userId": 1,
 	"parcel": {
 		"quantity": 1,
@@ -43,7 +44,8 @@ For creating a parcel you have to post a json data:
 		"countryTo": "Kenya",
 		"postZipCodeTo": "23453"
 	}
-}```
+}
+```
 
 
 #### Core Technology
